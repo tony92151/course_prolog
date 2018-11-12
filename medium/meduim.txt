@@ -1,0 +1,160 @@
+1.
+    go:-write('b043021050'),nl,write('male'),nl,write('21'),nl,write('165cm'),nl,write('53kg').
+
+    ?-go.
+    b043021050
+    male
+    21
+    165cm
+    53kg
+    true
+
+2.
+
+(1)
+    isbigger(A,B):-(bigger(A,B);bigger(A,C),isbigger(C,B)).
+
+    ?-isbigger(bear,ant).
+    true
+
+(2)
+    isbigger(A,B):-(bigger(A,B);bigger(A,C),isbigger(C,B)).
+
+    ?-isbigger(eagle,lion).
+    false
+ 
+(3)
+    isbiggerthan(A):-bigger(A,B),write(B),nl,isbiggerthan(B).
+
+    ?-isbiggerthan(elephant).
+    bear
+    lion
+    goat
+    dog
+    eagle
+    fish
+    mouse
+    ant
+    false
+
+(4)
+    isbigger(A,B):-(bigger(A,B);bigger(A,C),isbigger(C,B)).
+
+    ?-isbiggerthan(goat).
+    dog
+    eagle
+    fish
+    mouse
+    ant
+    false
+
+3.
+
+(1)
+    trans:-get0(W),(W == 10;write(W),nl,trans).
+
+    ?- trans.
+    |: Artificial Intelligence Language – Prolog
+    65
+    114
+    116
+    105
+    102
+    105
+    99
+    105
+    97
+    108
+    32
+    73
+    110
+    116
+    101
+    108
+    108
+    105
+    103
+    101
+    110
+    99
+    101
+    32
+    76
+    97
+    110
+    103
+    117
+    97
+    103
+    101
+    32
+    8211
+    32
+    80
+    114
+    111
+    108
+    111
+    103
+    32
+    46
+    true .
+
+(2)
+
+    transback:-read(R),put(R),transback.
+
+    ?- transback.
+    |: 75. 101. 101. 112. 32. 111. 110. 32. 103. 111. 105. 110. 103. 32. 110. 101. 118. 101. 114. 32. 103. 105. 118. 101. 32. 117. 112. 46.
+    Keep on going never give up.|: 
+
+4.
+
+(1)
+
+    grandmother(A,B):-mother(A,C),mother(C,B).
+
+    ?-grandmother(jane,mark).
+    false
+
+(2)
+    grandsonof(G,S):-father(G,A),father(A,S).
+    grandsonof(G,S):-mother(G,A),father(A,S).
+    grandsonof(G,S):-father(G,A),mother(A,S).
+    grandsonof(G,S):-mother(G,A),mother(A,S).
+
+    ?-grandsonof(eric,X).
+    false
+
+(3)
+    uncleof(A,B):-father(G,A),father(S,G),father(S,B),person(B,male,_,_).
+
+    ?-uncleof(peter,X).
+    X = francis
+    X = louise
+    X = tom
+
+(4)
+    fatherisdoc(A):-father(B,A),person(B,male,doctor,_).
+
+    ?-fatherisdoc(ruby).
+    true
+
+5.
+(1)
+    type(P,T):-person(P,K,M),Bmi is M/((K/100)*(K/100)),class(Bmi,T).
+    class(Bmi,T):-Bmi<18.5,T ='too light'.
+    class(Bmi,T):-18.5=<Bmi,Bmi<24,T ='normal'.
+    class(Bmi,T):-24=<Bmi,T ='overweight'.
+
+    ?-type(a,Type).
+    Type = normal
+
+(2)
+    count(A_,B_,C_):-A is 0,B is 0,C is 0,compute1(A,A_),compute2(B,B_),compute3(C,C_).
+    compute1(A,A_):-(type(_,T),T ='too light',A is A+1;A is A),A_ is A.
+    compute2(B,B_):-(type(_,T),T ='normal',B is B+1;B is B),B_ is B.
+    compute3(C,C_):-(type(_,T),T ='overweight',B is B+1;B is B),C_ is C.
+
+    失敗
+
