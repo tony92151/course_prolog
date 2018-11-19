@@ -23,7 +23,7 @@
     ?-isbigger(eagle,lion).
     false
  
-(3)
+(3)XX
     isbiggerthan(A):-bigger(A,B),write(B),nl,isbiggerthan(B).
 
     ?-isbiggerthan(elephant).
